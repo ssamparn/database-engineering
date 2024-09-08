@@ -1,19 +1,4 @@
-#### Install sample data files on server `customers.sql`
-```sql
-select * from "public"."customers"
-```
-
-#### Install sample data files on server `products.sql`
-```sql
-select * from "public"."products"
-```
-
-#### Install sample data files on server `purchases.sql`
-```sql
-select * from "public"."purchases"
-```
-
-#### Install Human Resources (hr) database `hr.sql`
+#### install Human Resources (hr) database `hr.sql`
 ```sql
 select * from "public"."countries"
 select * from "public"."departments"
@@ -24,14 +9,14 @@ select * from "public"."locations"
 select * from "public"."regions"
 ```
 
-#### Install sample stocks market data `stocks_prices.sql`, `stocks_symbols.sql` and `stocks_types.sql`
+#### install sample stocks market data `stocks_prices.sql`, `stocks_symbols.sql` and `stocks_types.sql`
 ```sql
 select * from "public"."stocks_symbols"
 select * from "public"."stocks_types"
 select * from "public"."stocks_prices"
 ```
 
-#### Install Northwind database `northwind.sql`
+#### install Northwind database `northwind.sql`
 ```sql
 select * from "public"."categories"
 select * from "public"."customer_customer_demo"
@@ -49,7 +34,7 @@ select * from "public"."territories"
 select * from "public"."us_states"
 ```
 
-#### Drop a database `drop_database.sql`
+#### drop a database `drop_database.sql`
 ```sql
 
 ```

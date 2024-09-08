@@ -26,6 +26,6 @@ INSERT INTO "public"."customers" VALUES ('5', 'Hannah', 'Rose');
 COMMIT;
 
 -- --------------------------------------
---  Add primary key for table : customers
+--  Add primary key for customers Table:
 -- --------------------------------------
 ALTER TABLE "public"."customers" ADD PRIMARY KEY ("customer_id") NOT DEFERRABLE INITIALLY IMMEDIATE;
