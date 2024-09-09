@@ -1,40 +1,12 @@
-#### install Human Resources (hr) database `hr.sql`
-```sql
-select * from "public"."countries"
-select * from "public"."departments"
-select * from "public"."employees"
-select * from "public"."job_history"
-select * from "public"."jobs"
-select * from "public"."locations"
-select * from "public"."regions"
-```
+#### create all the movie tables `creating+actors+directors+table+movies_with_foreign_key+junction+table+revenue+table.sql`
+#### Install sample data for movies database
 
-#### install sample stocks market data `stocks_prices.sql`, `stocks_symbols.sql` and `stocks_types.sql`
+
 ```sql
-select * from "public"."stocks_symbols"
-select * from "public"."stocks_types"
-select * from "public"."stocks_prices"
+select * from "public"."actors";
 ```
 
 #### install Northwind database `northwind.sql`
 ```sql
 select * from "public"."categories"
-select * from "public"."customer_customer_demo"
-select * from "public"."customer_demographics"
-select * from "public"."customers"
-select * from "public"."employee_territories"
-select * from "public"."employees"
-select * from "public"."order_details"
-select * from "public"."orders"
-select * from "public"."products"
-select * from "public"."region"
-select * from "public"."shippers"
-select * from "public"."suppliers"
-select * from "public"."territories"
-select * from "public"."us_states"
-```
-
-#### drop a database `drop_database.sql`
-```sql
-
 ```
