@@ -1,6 +1,12 @@
 ---------------------------
 -- PostgreSQL database dump
 ---------------------------
+CREATE DATABASE "northwind"
+WITH
+OWNER = sashank
+ENCODING = 'UTF8'
+CONNECTION LIMIT = -1
+IS_TEMPLATE = False;
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -17,7 +23,6 @@ SET default_with_oids = false;
 ---------------
 --- Drop Tables
 ---------------
-
 DROP TABLE IF EXISTS customer_customer_demo;
 DROP TABLE IF EXISTS customer_demographics;
 DROP TABLE IF EXISTS employee_territories;
@@ -36,7 +41,6 @@ DROP TABLE IF EXISTS employees;
 -----------------------------------------------------------------------
 -- Name: categories; Type: TABLE; Schema: public; Owner: -; Tablespace:
 -----------------------------------------------------------------------
-
 CREATE TABLE categories (
     category_id smallint NOT NULL,
     category_name character varying(15) NOT NULL,
@@ -47,7 +51,6 @@ CREATE TABLE categories (
 ----------------------------------------------------------------------------------
 -- Name: customer_customer_demo; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 ----------------------------------------------------------------------------------
-
 CREATE TABLE customer_customer_demo (
     customer_id bpchar NOT NULL,
     customer_type_id bpchar NOT NULL
@@ -56,7 +59,6 @@ CREATE TABLE customer_customer_demo (
 ----------------------------------------------------------------------------------
 -- Name: customer_demographics; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 ----------------------------------------------------------------------------------
-
 CREATE TABLE customer_demographics (
     customer_type_id bpchar NOT NULL,
     customer_desc text
@@ -65,7 +67,6 @@ CREATE TABLE customer_demographics (
 ----------------------------------------------------------------------
 -- Name: customers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 ----------------------------------------------------------------------
-
 CREATE TABLE customers (
     customer_id bpchar NOT NULL,
     company_name character varying(40) NOT NULL,
@@ -83,7 +84,6 @@ CREATE TABLE customers (
 ----------------------------------------------------------------------
 -- Name: employees; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 ----------------------------------------------------------------------
-
 CREATE TABLE employees (
     employee_id smallint NOT NULL,
     last_name character varying(20) NOT NULL,
@@ -108,7 +108,6 @@ CREATE TABLE employees (
 ---------------------------------------------------------------------------------
 -- Name: employee_territories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 ---------------------------------------------------------------------------------
-
 CREATE TABLE employee_territories (
     employee_id smallint NOT NULL,
     territory_id character varying(20) NOT NULL
@@ -117,7 +116,6 @@ CREATE TABLE employee_territories (
 --------------------------------------------------------------------------
 -- Name: order_details; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --------------------------------------------------------------------------
-
 CREATE TABLE order_details (
     order_id smallint NOT NULL,
     product_id smallint NOT NULL,
@@ -129,7 +127,6 @@ CREATE TABLE order_details (
 -------------------------------------------------------------------
 -- Name: orders; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 -------------------------------------------------------------------
-
 CREATE TABLE orders (
     order_id smallint NOT NULL,
     customer_id bpchar,

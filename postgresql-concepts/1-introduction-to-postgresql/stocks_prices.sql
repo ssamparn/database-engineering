@@ -6,7 +6,6 @@ DROP TABLE IF EXISTS "public"."stocks_prices";
 -- ---------------------------
 --  Create stocks_prices table
 -- ---------------------------
-
 CREATE TABLE "public"."stocks_prices" (
 	"price_id" int4 NOT NULL,
 	"symbol_id" int4 NOT NULL,
@@ -23,7 +22,6 @@ WITH (OIDS=FALSE);
 -- ----------------------------------
 --  Insert records into stocks_prices
 -- ----------------------------------
-
 BEGIN;
 INSERT INTO "public"."stocks_prices" VALUES ('1','1','2010-01-04','4.562143','4.656402','4.392477','4.496162','-0.066','-1.4463');
 INSERT INTO "public"."stocks_prices" VALUES ('2','1','2010-01-05','4.515014','5.061717','4.439606','5.005161','0.509','11.3208');

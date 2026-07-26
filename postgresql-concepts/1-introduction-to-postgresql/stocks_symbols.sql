@@ -1,13 +1,11 @@
 -- --------------------------
 --  Drop stocks_symbols table
 -- --------------------------
-
 DROP TABLE IF EXISTS "public"."stocks_symbols";
 
 -- ----------------------------
 --  Create stocks_symbols table
 -- ----------------------------
-
 CREATE TABLE "public"."stocks_symbols" (
 	"symbol_id" int4 NOT NULL,
 	"symbol" varchar(50) NOT NULL COLLATE "default",
@@ -17,10 +15,9 @@ CREATE TABLE "public"."stocks_symbols" (
 )
 WITH (OIDS=FALSE);
 
--- ----------------------------------------
+-- -----------------------------------------
 --  Insert records into stock_symbols table
--- ----------------------------------------
-
+-- -----------------------------------------
 BEGIN;
 INSERT INTO "public"."stocks_symbols" VALUES ('1','AAL','American Airlines Group Inc','EQS','Services');
 INSERT INTO "public"."stocks_symbols" VALUES ('2','AAPL','Apple Inc','EQS','Consumer Goods');
@@ -42,5 +39,4 @@ COMMIT;
 -- ---------------------------------------
 --  Add primary key to stock_symbols table
 -- ---------------------------------------
-
 ALTER TABLE "public"."stocks_symbols" ADD PRIMARY KEY ("symbol_id") NOT DEFERRABLE INITIALLY IMMEDIATE;

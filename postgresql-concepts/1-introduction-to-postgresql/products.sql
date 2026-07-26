@@ -6,7 +6,6 @@ DROP TABLE IF EXISTS "public"."products";
 -- ----------------------
 --  Create products table
 -- ----------------------
-
 CREATE TABLE "public"."products" (
 	"product_id" int4 NOT NULL,
 	"product_name" varchar(255) NOT NULL COLLATE "default",

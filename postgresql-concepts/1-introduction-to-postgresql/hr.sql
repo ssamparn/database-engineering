@@ -2,17 +2,21 @@
 --  Database : hr - Human Resources
 --  Make sure to create a database called "hr"
 -- -------------------------------------------
+CREATE DATABASE "hr"
+WITH
+OWNER = sashank
+ENCODING = 'UTF8'
+CONNECTION LIMIT = -1
+IS_TEMPLATE = False;
 
 -- -------------------
 --  Drop regions table
 -- -------------------
-
 DROP TABLE IF EXISTS "public"."regions";
 
 -- ---------------------
 --  Create regions table
 -- ---------------------
-
 CREATE TABLE "public"."regions" (
     region_id numeric(10,0) NOT NULL,
     region_name character(25)
@@ -22,7 +26,6 @@ WITH (OIDS=FALSE);
 -- -------------------------------
 --  Insert data into regions table
 -- -------------------------------
-
 BEGIN;
 INSERT INTO "public"."regions" VALUES (1,'Europe');
 INSERT INTO "public"."regions" VALUES (2,'Americas');
@@ -33,19 +36,16 @@ COMMIT;
 -- ---------------------------------
 --  Add primary key to regions table
 -- ---------------------------------
-
 ALTER TABLE "public"."regions" ADD PRIMARY KEY ("region_id") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 -- ---------------------
 --  Drop countries table
 -- ---------------------
-
 DROP TABLE IF EXISTS "public"."countries";
 
 -- -----------------------
 --  Create countries table
 -- -----------------------
-
 CREATE TABLE "public"."countries" (
     country_id character varying(2) NOT NULL,
     country_name character varying(40) DEFAULT NULL::character varying,
@@ -56,7 +56,6 @@ WITH (OIDS=FALSE);
 -- ------------------------------------
 --  Insert records into countries table
 -- ------------------------------------
-
 BEGIN;
 INSERT INTO "public"."countries" VALUES ('AR','Argentina','2');
 INSERT INTO "public"."countries" VALUES ('AU','Australia','3');
@@ -88,19 +87,16 @@ COMMIT;
 -- -----------------------------------
 --  Add primary key to countries table
 -- -----------------------------------
-
 ALTER TABLE "public"."countries" ADD PRIMARY KEY ("country_id") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 -- ---------------------
 --  Drop locations table
 -- ---------------------
-
 DROP TABLE IF EXISTS "public"."locations";
 
 -- -----------------------
 --  Create locations table
 -- -----------------------
-
 CREATE TABLE "public"."locations" (
     location_id numeric(4,0) DEFAULT (0)::numeric NOT NULL,
     street_address character varying(40) DEFAULT NULL::character varying,
@@ -114,7 +110,6 @@ WITH (OIDS=FALSE);
 -- ------------------------------------
 --  Insert records into locations table
 -- ------------------------------------
-
 BEGIN;
 INSERT INTO "public"."locations" VALUES (1000,'1297 Via Cola di Rie','989','Roma',null,'IT');
 INSERT INTO "public"."locations" VALUES (1100,'93091 Calle della Testa','10934','Venice',null,'IT');
@@ -136,19 +131,16 @@ COMMIT;
 -- -----------------------------------
 --  Add primary key to locations table
 -- -----------------------------------
-
 ALTER TABLE "public"."locations" ADD PRIMARY KEY ("location_id") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 -- -----------------------
 --  Drop departments table
 -- -----------------------
-
 DROP TABLE IF EXISTS "public"."departments";
 
 -- -------------------------
 --  Create departments table
 -- -------------------------
-
 CREATE TABLE "public"."departments" (
     department_id numeric(4,0) NOT NULL,
     department_name character varying(30) NOT NULL,
@@ -160,7 +152,6 @@ WITH (OIDS=FALSE);
 -- --------------------------------------
 --  Insert records into departments table
 -- --------------------------------------
-
 BEGIN;
 INSERT INTO "public"."departments" VALUES (10,'Administration','200','1700');
 INSERT INTO "public"."departments" VALUES (20,'Marketing','201','1800');
@@ -194,19 +185,16 @@ COMMIT;
 -- -------------------------------------
 --  Add primary key to departments table
 -- -------------------------------------
-
 ALTER TABLE "public"."departments" ADD PRIMARY KEY ("department_id") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 -- ----------------
 --  Drop jobs table
 -- ----------------
-
 DROP TABLE IF EXISTS "public"."jobs";
 
 -- ------------------
 --  Create jobs table
 -- ------------------
-
 CREATE TABLE "public"."jobs" (
     job_id character varying(10) DEFAULT ''::character varying NOT NULL,
     job_title character varying(35) NOT NULL,
@@ -218,7 +206,6 @@ WITH (OIDS=FALSE);
 -- -------------------------------
 --  Insert records into jobs table
 -- -------------------------------
-
 BEGIN;
 INSERT INTO "public"."jobs" VALUES ('AD_PRES','President','20000','40000');
 INSERT INTO "public"."jobs" VALUES ('AD_VP','Administration Vice President','15000','30000');
@@ -250,13 +237,11 @@ ALTER TABLE "public"."jobs" ADD PRIMARY KEY ("job_id") NOT DEFERRABLE INITIALLY 
 -- ---------------------
 --  Drop employees table
 -- ---------------------
-
 DROP TABLE IF EXISTS "public"."employees";
 
 -- -----------------------
 --  Create employees table
 -- -----------------------
-
 CREATE TABLE "public"."employees" (
     employee_id numeric(6,0) DEFAULT (0)::numeric NOT NULL,
     first_name character varying(20) DEFAULT NULL::character varying,
@@ -275,7 +260,6 @@ WITH (OIDS=FALSE);
 -- ------------------------------------
 --  Insert records into employees table
 -- ------------------------------------
-
 BEGIN;
 INSERT INTO "public"."employees" VALUES (100,'Steven','King','steven.king@company.com','515.123.4567','2010-06-17','AD_PRES','24000','0','0','90');
 INSERT INTO "public"."employees" VALUES (101,'Neena','Kochhar','neena.kochhar@company.com','515.123.4568','2010-06-18','AD_VP','17000','0','100','90');
@@ -389,19 +373,16 @@ COMMIT;
 -- -----------------------------------
 --  Add primary key to employees table
 -- -----------------------------------
-
 ALTER TABLE "public"."employees" ADD PRIMARY KEY ("employee_id") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 -- -----------------------
 --  Drop job_history Table
 -- -----------------------
-
 DROP TABLE IF EXISTS "public"."job_history";
 
--- -----------------------
+-- -------------------------
 --  Create job_history Table
--- -----------------------
-
+-- -------------------------
 CREATE TABLE "public"."job_history" (
     employee_id numeric(6,0) NOT NULL,
     start_date date NOT NULL,
@@ -414,7 +395,6 @@ WITH (OIDS=FALSE);
 -- --------------------------------------
 --  Insert records into job_history table
 -- --------------------------------------
-
 BEGIN;
 INSERT INTO "public"."job_history" VALUES (102,'1993-01-13','2010-07-24','IT_PROG','60');
 INSERT INTO "public"."job_history" VALUES (101,'1989-09-21','2010-10-27','AC_ACCOUNT','110');

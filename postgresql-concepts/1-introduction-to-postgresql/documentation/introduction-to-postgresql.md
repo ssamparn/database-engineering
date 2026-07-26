@@ -1,4 +1,4 @@
-#### create an user
+#### Create a database user
 ```sql
 DROP ROLE IF EXISTS sashank;
 CREATE ROLE sashank WITH
@@ -11,7 +11,7 @@ CREATE ROLE sashank WITH
     ENCRYPTED PASSWORD 'SCRAM-SHA-256$4096:fYOSq+ETNva/5fZA0IZdWg==$S+pTvjt2RlsvKL9Oyu4/JtmeCr9kMYna/vJlF3qKo/s=:sJ1XIwU559BGDg/xVsUiRMNAYpbEB4sIDADzi/NSOE0=';
 ```
 
-#### create a database
+#### Create a database
 ```sql
 CREATE DATABASE "learning-postgres"
 WITH
@@ -21,40 +21,40 @@ CONNECTION LIMIT = -1
 IS_TEMPLATE = False;
 ```
 
-#### install sample data files on server `customers.sql`
+#### Run sql statements in `customers.sql`
 ```sql
 select * from "public"."customers"
 ```
 
-#### install sample data files on server `products.sql`
+#### Run sql statements in `products.sql`
 ```sql
 select * from "public"."products"
 ```
 
-#### install sample data files on server `purchases.sql`
+#### Run sql statements in `purchases.sql`
 ```sql
 select * from "public"."purchases"
 ```
 
-#### install Human Resources (hr) database `hr.sql`
+#### Run sql statements in `hr.sql`
 ```sql
-select * from "public"."countries"
-select * from "public"."departments"
-select * from "public"."employees"
-select * from "public"."job_history"
-select * from "public"."jobs"
-select * from "public"."locations"
-select * from "public"."regions"
+select * from "public"."countries";
+select * from "public"."departments";
+select * from "public"."employees";
+select * from "public"."job_history";
+select * from "public"."jobs";
+select * from "public"."locations";
+select * from "public"."regions";
 ```
 
-#### install sample stocks market data `stocks_prices.sql`, `stocks_symbols.sql` and `stocks_types.sql`
+#### Run sql statements in `stocks_prices.sql`, `stocks_symbols.sql` and `stocks_types.sql`
 ```sql
-select * from "public"."stocks_symbols"
-select * from "public"."stocks_types"
-select * from "public"."stocks_prices"
+select * from "public"."stocks_prices";
+select * from "public"."stocks_symbols";
+select * from "public"."stocks_types";
 ```
 
-#### install Northwind database `northwind.sql`
+#### Run sql statements in `northwind.sql`
 ```sql
 select * from "public"."categories"
 select * from "public"."customer_customer_demo"
@@ -74,5 +74,6 @@ select * from "public"."us_states"
 
 #### drop a database `drop_database.sql`
 ```sql
-
+CREATE DATABASE db_test;
+DROP DATABASE IF EXISTS db_test;       
 ```

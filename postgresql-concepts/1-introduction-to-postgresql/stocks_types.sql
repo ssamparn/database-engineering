@@ -6,7 +6,6 @@ DROP TABLE IF EXISTS "public"."stocks_types";
 -- --------------------------
 --  Create stocks_types table
 -- --------------------------
-
 CREATE TABLE "public"."stocks_types" (
 	"type_id" int4 NOT NULL,
 	"type_code" varchar(10) NOT NULL COLLATE "default",
@@ -25,5 +24,4 @@ COMMIT;
 -- --------------------------------------
 --  Add primary key to stocks_types table
 -- --------------------------------------
-
 ALTER TABLE "public"."stocks_types" ADD PRIMARY KEY ("type_id") NOT DEFERRABLE INITIALLY IMMEDIATE;
