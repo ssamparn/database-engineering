@@ -6,6 +6,14 @@
 SELECT * FROM table_name;
 */
 
+/*
+    In Spring Data JPA, the findAll() method is used to retrieve all records from a database table.
+    It is a built-in method provided by the JpaRepository interface, which is a part of the Spring Data JPA framework.
+    When you call the findAll() method on a repository interface that extends JpaRepository, it will execute a query to fetch all the records from the corresponding database table and return them as a list of entities.
+    The findAll() method is useful when you want to retrieve all the data from a table without any filtering or pagination.
+    However, it is important to note that if the table contains a large number of records, retrieving all of them at once may lead to performance issues.
+    In such cases, it is recommended to use pagination or filtering techniques to fetch the data in smaller chunks.
+*/
 -- Get all records from movies table.
 
 SELECT * FROM movies;
@@ -40,6 +48,16 @@ SELECT * FROM MOVIES;
 /*
 SELECT column_1, column_2
 FROM table_name;
+*/
+
+/*
+    In Spring Data JPA, you can use the @Query annotation to define a custom query that selects specific columns from a database table.
+    By specifying the desired columns in the query, you can retrieve only the necessary data instead of fetching all columns using the findAll() method.
+    This approach improves performance and reduces unnecessary data transfer between the database and application.
+
+    e.g: @Query("SELECT a.firstName, a.lastName FROM Actor a")
+         List<Object[]> findActorNames();
+
 */
 
 -- Get first name, last_name from actors table.
