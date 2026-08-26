@@ -371,3 +371,53 @@ WHERE
     m.movie_lang IN ('English', 'Chinese', 'Japanese')
 AND
     mr.revenues_domestic > 100;
+
+-- 5. Select the movie name, director name, movie language, total revenues of all top 5 movies.
+SELECT
+    m.movie_name AS "Movie Name",
+    m.movie_lang AS "Movie Language",
+    d.first_name AS "Director First Name",
+    d.last_name AS "Director Last Name",
+    mr.revenues_domestic AS "Domestic Revenue",
+    mr.revenues_international AS "International Revenue",
+    (mr.revenues_domestic + mr.revenues_international) AS "Total Revenue"
+FROM
+    movies AS m
+INNER JOIN
+    directors AS d
+USING
+    (director_id)
+INNER JOIN
+    movies_revenues AS mr
+USING
+    (movie_id)
+ORDER BY
+    "Total Revenue"
+DESC NULLS LAST
+LIMIT 5;
+
+-- 7. What were the top 10 most profitable movies between year 2005 and 2008? Select the movie name, director name, movie language, total revenues of all top 10 movies.
+SELECT
+    m.movie_name AS "Movie Name",
+    m.movie_lang AS "Movie Language",
+    m.release_date AS "Movie Release Date",
+    d.first_name AS "Director First Name",
+    d.last_name AS "Director Last Name",
+    mr.revenues_domestic AS "Domestic Revenue",
+    mr.revenues_international AS "International Revenue",
+    (mr.revenues_domestic + mr.revenues_international) AS "Total Revenue"
+FROM
+    movies AS m
+INNER JOIN
+    directors AS d
+USING
+    (director_id)
+INNER JOIN
+    movies_revenues AS mr
+USING
+    (movie_id)
+WHERE
+    m.release_date BETWEEN '2005-01-01' AND '2008-12-31'
+ORDER BY
+    "Total Revenue" DESC NULLS LAST
+LIMIT 10;
