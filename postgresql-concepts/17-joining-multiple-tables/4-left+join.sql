@@ -156,3 +156,148 @@
 
 
 */
+
+-- 1. Let's create some sample tables for our JOIN exercises:
+-- To better visualize join types, let's call the tables "left_products" and "right_products"
+
+CREATE TABLE left_products (
+    product_id SERIAL PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE right_products (
+    product_id SERIAL PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL
+);
+
+-- Insert sample data into left_products
+INSERT INTO left_products (product_id, product_name) VALUES
+(1, 'Computers'),
+(2, 'Laptops'),
+(3, 'Monitors'),
+(5, 'Mics');
+
+-- Insert sample data into right_products
+INSERT INTO right_products (product_id, product_name) VALUES
+(1, 'Computers'),
+(2, 'Laptops'),
+(3, 'Monitors'),
+(4, 'Pen'),
+(7, 'Paper');
+
+-- Now, let's perform a LEFT JOIN on these two tables to see how it works.
+SELECT
+    lp.product_id AS left_product_id,
+    lp.product_name AS left_product_name,
+    rp.product_id AS right_product_id,
+    rp.product_name AS right_product_name
+FROM
+    left_products lp
+LEFT JOIN
+    right_products rp ON lp.product_id = rp.product_id;
+
+-- What we expect to see in the result set:
+-- 1. All records from the left_products table will be returned.
+-- 2. For records in left_products that have a matching product_id in right_products, the corresponding right_product_id and right_product_name will be displayed.
+-- 3. For records in left_products that do not have a matching product_id in right_products, the right_product_id and right_product_name will be NULL.
+
+
+-- 2. Let's also perform a LEFT JOIN in the opposite direction to see how it behaves.
+SELECT
+    rp.product_id AS right_product_id,
+    rp.product_name AS right_product_name,
+    lp.product_id AS left_product_id,
+    lp.product_name AS left_product_name
+FROM
+    right_products rp
+LEFT JOIN
+    left_products lp ON rp.product_id = lp.product_id;
+
+-- What we expect to see in the result set:
+-- 1. All records from the right_products table will be returned.
+-- 2. For records in right_products that have a matching product_id in left_products, the corresponding left_product_id and left_product_name will be displayed.
+-- 3. For records in right_products that do not have a matching product_id in left_products, the left_product_id and left_product_name will be NULL.
+
+
+-- 3. Let's perform LEFT JOIN of directors table with movie table to see how it works in a real-world scenario.
+-- List all the movies with their corresponding directors, and movie names.
+SELECT
+    m.movie_id AS "Movie ID",
+    m.movie_name AS "Movie Name",
+    d.director_id AS "Director ID",
+    d.first_name AS "Director First Name",
+    d.last_name AS "Director Last Name"
+FROM
+    directors d
+LEFT JOIN
+    movies m ON m.director_id = d.director_id;
+
+
+-- 4. Let's get all english and chinese movies with their corresponding directors only.
+SELECT
+    d.director_id AS "Director ID",
+    d.first_name AS "Director First Name",
+    d.last_name AS "Director Last Name",
+    m.movie_id AS "Movie ID",
+    m.movie_name AS "Movie Name",
+    m.movie_lang AS "Movie Language"
+FROM
+    directors d
+LEFT JOIN
+    movies m ON m.director_id = d.director_id
+WHERE
+    m.movie_lang IN ('English', 'Chinese');
+
+
+-- 5. Let's count all movies with their corresponding directors, and movie names.
+SELECT
+    d.director_id AS "Director ID",
+    d.first_name AS "Director First Name",
+    d.last_name AS "Director Last Name",
+    COUNT(m.movie_id) AS "Total Movies"
+FROM
+    directors d
+LEFT JOIN
+    movies m ON m.director_id = d.director_id
+GROUP BY
+    d.director_id, d.first_name, d.last_name
+ORDER BY
+    "Total Movies" DESC;
+
+-- 6. Get all the movies with age certification for all directors where nationalities are 'American', 'Chinese', and 'Japanese'.
+SELECT
+    d.director_id AS "Director ID",
+    d.first_name AS "Director First Name",
+    d.last_name AS "Director Last Name",
+    d.nationality AS "Director Nationality",
+    m.movie_id AS "Movie ID",
+    m.movie_name AS "Movie Name",
+    m.age_certificate AS "Movie Age Certification"
+FROM
+    directors d
+LEFT JOIN
+    movies m ON d.director_id = m.director_id
+WHERE
+    d.nationality IN ('American', 'Chinese', 'Japanese');
+
+-- 7. Get all the total revenues done by each film for each director where total revenue is more than 100.
+-- Now the question arises, What is the first table or Left table and what is the second table or Right table in this case?
+-- In this case, the "directors" table is the left table, and the "movies" and "movies_revenues" tables are the right tables.
+-- The LEFT JOIN will return all records from the "directors" table, along with any matching records from the "movies" and "movies_revenues" tables.
+-- If a director does not have any movies or revenue data, the corresponding fields from the right tables will be NULL.
+SELECT
+    d.director_id AS "Director ID",
+    d.first_name AS "Director First Name",
+    d.last_name AS "Director Last Name",
+    SUM(mr.revenues_domestic + mr.revenues_international) AS "Total Revenue"
+FROM
+    directors d
+LEFT JOIN
+    movies m ON m.director_id = d.director_id
+LEFT JOIN
+    movies_revenues mr ON mr.movie_id = m.movie_id
+GROUP BY
+    d.director_id, d.first_name, d.last_name
+HAVING SUM(mr.revenues_domestic + mr.revenues_international) > 100
+ORDER BY
+    "Total Revenue" DESC NULLS LAST;
