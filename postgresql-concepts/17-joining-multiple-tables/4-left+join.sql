@@ -42,7 +42,8 @@
 
     4. "Can you explain how NULL values are handled in LEFT JOIN?"
     Answer:
-        - In a LEFT JOIN, if there is no match for a record in the left table, the result will include NULL values for the columns from the right table. This allows you to see all records from the left table, even if there are no corresponding records in the right table. For example, if you have a "Students" table and a "Grades" table, and you want to find all students and their grades (if any), a LEFT JOIN would return all students, with NULL values for the grade columns for students who do not have any grades recorded.
+        - In a LEFT JOIN, if there is no match for a record in the left table, the result will include NULL values for the columns from the right table. This allows you to see all records from the left table, even if there are no corresponding records in the right table.
+        For example, if you have a "Students" table and a "Grades" table, and you want to find all students and their grades (if any), a LEFT JOIN would return all students, with NULL values for the grade columns for students who do not have any grades recorded.
 
     5. "Can you explain how to use LEFT JOIN with multiple tables?"
     Answer:
@@ -51,13 +52,15 @@
             FROM customers
             LEFT JOIN orders ON customers.id = orders.customer_id
             LEFT JOIN products ON orders.product_id = products.id;
+
     6. "Can you explain the difference between LEFT JOIN and RIGHT JOIN?"
     Answer:
         - LEFT JOIN returns all records from the left table and the matched records from the right table, while RIGHT JOIN returns all records from the right table and the matched records from the left table.
 
     7. "Can you explain how to use LEFT JOIN with aggregate functions?"
     Answer:
-        - You can use LEFT JOIN with aggregate functions to perform calculations on the joined data. For example, if you want to find the total sales for each customer, including customers who have not made any purchases, you could use the following query:
+        - You can use LEFT JOIN with aggregate functions to perform calculations on the joined data. For example, if you want to find the total sales for each customer, including customers who have not made any purchases.
+        You could use the following query:
             SELECT customers.name, SUM(orders.amount)
             FROM customers
             LEFT JOIN orders ON customers.id = orders.customer_id
@@ -196,7 +199,7 @@ FROM
 LEFT JOIN
     right_products rp ON lp.product_id = rp.product_id;
 
--- What we expect to see in the result set:
+-- What we expect to see in the result set?
 -- 1. All records from the left_products table will be returned.
 -- 2. For records in left_products that have a matching product_id in right_products, the corresponding right_product_id and right_product_name will be displayed.
 -- 3. For records in left_products that do not have a matching product_id in right_products, the right_product_id and right_product_name will be NULL.
@@ -230,7 +233,8 @@ SELECT
 FROM
     directors d
 LEFT JOIN
-    movies m ON m.director_id = d.director_id;
+    movies m
+ON m.director_id = d.director_id;
 
 
 -- 4. Let's get all english and chinese movies with their corresponding directors only.
