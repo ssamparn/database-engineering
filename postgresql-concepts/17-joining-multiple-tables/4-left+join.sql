@@ -305,3 +305,8 @@ GROUP BY
 HAVING SUM(mr.revenues_domestic + mr.revenues_international) > 100
 ORDER BY
     "Total Revenue" DESC NULLS LAST;
+
+-- Note: Reversing the order of the tables in a LEFT JOIN generally changes the result set, because the query returns all rows from the left table and only matching rows from the right table.
+-- The word "generally" above is important because in some special cases (for example, a perfect one-to-one match with no unmatched rows), the results may happen to be the same. However, the join semantics do change.
+-- So, a LEFT JOIN can be rewritten as a RIGHT JOIN by swapping the table order.
+-- LEFT JOIN and RIGHT JOIN are not symmetric joins, so swapping table order generally changes the logical result set.

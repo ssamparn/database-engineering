@@ -176,7 +176,57 @@
     Ultimately, the decision to rely on Hibernate or write queries manually should be based on the specific requirements of your application, the complexity of the queries, and the performance considerations.
 */
 
--- 1. Lets combine directors and movies tables to get the list of movies along with their directors using INNER JOIN.
+-- 1. Let's create some sample tables for our JOIN exercises:
+-- To better visualize join types, let's call the tables "left_products" and "right_products"
+
+CREATE TABLE left_products (
+    product_id SERIAL PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE right_products (
+    product_id SERIAL PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL
+);
+
+-- Insert sample data into left_products
+INSERT INTO left_products (product_id, product_name) VALUES
+    (1, 'Computers'),
+    (2, 'Laptops'),
+    (3, 'Monitors'),
+    (5, 'Mics')
+;
+
+-- Insert sample data into right_products
+INSERT INTO right_products (product_id, product_name) VALUES
+    (1, 'Computers'),
+    (2, 'Laptops'),
+    (3, 'Monitors'),
+    (4, 'Pen'),
+    (7, 'Paper')
+;
+
+-- Now, let's perform an INNER JOIN on these two tables to see how it works.
+SELECT
+    lp.product_id AS left_product_id,
+    lp.product_name AS left_product_name,
+    rp.product_id AS right_product_id,
+    rp.product_name AS right_product_name
+FROM
+    left_products lp
+INNER JOIN
+    right_products rp ON lp.product_id = rp.product_id;
+
+-- What we expect to see in the result set?
+-- 1. The result set will only include rows where there is a match in both tables based on the product_id column.
+-- 2. e.g: The result set will include the following rows:
+    -- left_product_id  | left_product_name | right_product_id | right_product_name
+    -- 1                | Computers         | 1                | Computers
+    -- 2                | Laptops           | 2                | Laptops
+    -- 3                | Monitors          | 3                | Monitors
+
+
+-- 2. Lets combine directors and movies tables to get the list of movies along with their directors using INNER JOIN.
 SELECT
     d.director_id,
     d.first_name,
@@ -213,7 +263,7 @@ ON
 ORDER BY
     director_id;
 
--- 2. Provide more meaningful column names in the result set using AS keyword.
+-- 3. Provide more meaningful column names in the result set using AS keyword.
 
 SELECT
     d.director_id,
@@ -232,7 +282,7 @@ FROM
 ORDER BY
     director_id;
 
--- 3. Filter only the English movies which were released after 2000 using WHERE clause.
+-- 4. Filter only the English movies which were released after 2000 using WHERE clause.
 SELECT
     d.director_id,
     d.first_name AS "Director First Name",
@@ -255,7 +305,7 @@ ORDER BY
     director_id;
 
 
--- 4. Get all the columns from both tables using * wildcard.
+-- 5. Get all the columns from both tables using * wildcard.
 SELECT
     m.*,
     d.*
@@ -396,7 +446,7 @@ ORDER BY
 DESC NULLS LAST
 LIMIT 5;
 
--- 7. What were the top 10 most profitable movies between year 2005 and 2008? Select the movie name, director name, movie language, total revenues of all top 10 movies.
+-- 6. What were the top 10 most profitable movies between year 2005 and 2008? Select the movie name, director name, movie language, total revenues of all top 10 movies.
 SELECT
     m.movie_name AS "Movie Name",
     m.movie_lang AS "Movie Language",
@@ -421,3 +471,6 @@ WHERE
 ORDER BY
     "Total Revenue" DESC NULLS LAST
 LIMIT 10;
+
+-- Note: Reversing the order of the tables in an INNER JOIN does not change the logical result set, because only matching rows from both tables are returned.
+-- INNER JOIN and FULL OUTER JOIN are symmetric joins, so swapping table order does not change the logical result set.

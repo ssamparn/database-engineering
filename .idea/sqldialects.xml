@@ -4,5 +4,9 @@
     <file url="file://$PROJECT_DIR$/postgresql-concepts/1-introduction-to-postgresql/customers.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/postgresql-concepts/17-joining-multiple-tables/1-join.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/postgresql-concepts/4-querying-data/2-adding+aliases.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/postgresql-concepts/postgresql-resources/actors.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/postgresql-concepts/postgresql-resources/directors.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/postgresql-concepts/postgresql-resources/movies_actors.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/postgresql-concepts/postgresql-resources/movies_revenues.sql" dialect="GenericSQL" />
   </component>
 </project>
