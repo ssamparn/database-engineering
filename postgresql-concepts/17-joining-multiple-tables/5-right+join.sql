@@ -181,3 +181,18 @@ ORDER BY
 -- The word "generally" above is important because in some special cases (for example, a perfect one-to-one match with no unmatched rows), the results may happen to be the same. However, the join semantics do change.
 -- So a RIGHT JOIN can be rewritten as a LEFT JOIN by swapping the table order.
 -- LEFT JOIN and RIGHT JOIN are not symmetric joins, so swapping table order generally changes the logical result set.
+
+/*
+    How to achieve RIGHT JOIN with Hibernate and Spring Data JPA?
+        - The Recommended Approach: Rewrite as LEFT JOIN
+        - In practice, RIGHT JOIN is rarely used in JPA applications because every RIGHT JOIN can be rewritten as an equivalent LEFT JOIN by swapping the entities.
+
+    RIGHT JOIN FETCH:
+        - Unlike LEFT JOIN FETCH and INNER JOIN FETCH, RIGHT JOIN FETCH is generally not supported in JPA/Hibernate & JPA, you can use the RIGHT JOIN FETCH clause to fetch associated entities in a single query.
+
+    For Interviews:
+        - Hibernate supports RIGHT JOIN in HQL/JPQL, but it is rarely used in Spring Data JPA.
+        - The preferred approach is to rewrite a RIGHT JOIN as an equivalent LEFT JOIN by swapping the entities.
+        - This improves readability, portability, and compatibility with JPA features such as fetch joins.
+        - In most real-world Spring Data JPA applications, LEFT JOIN is used instead of RIGHT JOIN.
+*/

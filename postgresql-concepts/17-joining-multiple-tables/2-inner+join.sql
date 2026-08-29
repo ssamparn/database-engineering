@@ -474,3 +474,74 @@ LIMIT 10;
 
 -- Note: Reversing the order of the tables in an INNER JOIN does not change the logical result set, because only matching rows from both tables are returned.
 -- INNER JOIN and FULL OUTER JOIN are symmetric joins, so swapping table order does not change the logical result set.
+
+/*
+    How to achieve INNER JOIN in Hibernate and Spring Data JPA?
+        - In Hibernate, you can achieve INNER JOIN using HQL (Hibernate Query Language) or Criteria API.
+        - In Spring Data JPA, you can achieve INNER JOIN using JPQL (Java Persistence Query Language) or the Criteria API.
+        - Both Hibernate and Spring Data JPA provide a way to define entity relationships using annotations such as @OneToMany, @ManyToOne, @OneToOne, and @ManyToMany.
+        - When querying these entities, Hibernate and Spring Data JPA will automatically generate the necessary SQL INNER JOIN statements based on the defined relationships.
+    e.g:
+        @Entity
+        public class Customer {
+            @Id
+            private Long customerId;
+            private String customerName;
+
+            @OneToMany(mappedBy = "customer")
+            private List<Order> orders;
+        }
+
+        @Entity
+        public class Order {
+            @Id
+            private Long orderId;
+            private LocalDate orderDate;
+
+            @ManyToOne
+            @JoinColumn(name = "customer_id")
+            private Customer customer;
+        }
+
+    JPQL:
+        @Query("SELECT
+                    c.customerId, c.customerName, o.orderId, o.orderDate
+                FROM
+                    Customer c
+                INNER JOIN
+                    c.orders o
+                ON
+                    c.customerId = o.customerId")
+        List<Customer> findCustomersWithOrders();
+
+    Now hibernate will automatically generate the necessary SQL INNER JOIN statements when you query the Customer and Order entities based on their relationship.
+    So, at runtime hibernate will generate the following SQL INNER JOIN statement:
+        SELECT
+            c.customer_id, c.customer_name, o.order_id, o.order_date
+        FROM
+            customers AS c
+        INNER JOIN
+            orders AS o
+        ON
+            c.customer_id = o.customer_id;
+
+    Fetch Associated Entities with INNER JOIN FETCH:
+        - In Hibernate, you can use the INNER JOIN FETCH clause to fetch associated entities in a single query, which can help to avoid the N+1 select problem.
+        - The INNER JOIN FETCH clause allows you to retrieve the parent entity along with its associated child entities in a single query, reducing the number of database round trips and improving performance.
+    e.g:
+        @Query("SELECT
+                    c
+                FROM
+                    Customer c
+                INNER JOIN FETCH
+                    c.orders o
+                WHERE
+                    c.customerId = :customerId")
+        Customer findCustomerWithOrders(@Param("customerId") Long customerId);
+
+    For Interviews:
+        - INNER JOIN in Hibernate and Spring Data JPA is implemented using JOIN in JPQL or HQL.
+        - It returns only records that have matching rows in both entities.
+        - When entities are related through mappings such as @ManyToOne or @OneToMany, the join is typically written as JOIN entity relationship.
+        - For performance optimization, JOIN FETCH can be used to eagerly load associated entities and avoid the N+1 query problem.
+*/

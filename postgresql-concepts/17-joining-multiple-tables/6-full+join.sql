@@ -104,3 +104,50 @@ ORDER BY
 
 -- Note: Reversing the table order in a FULL OUTER JOIN does not change the result set, as it returns all records from both tables regardless of the order.
 -- INNER JOIN and FULL OUTER JOIN are symmetric joins, so swapping table order does not change the logical result set.
+
+
+/*
+    How to achieve FULL JOIN with Hibernate and Spring Data JPA?
+        - No. Standard JPQL does not support FULL OUTER JOIN.
+        - JPQL supports:
+            - INNER JOIN
+            - LEFT JOIN
+            - LEFT JOIN FETCH
+          But not:
+            - RIGHT JOIN FETCH
+            - FULL OUTER JOIN
+
+    So we have 2 options.
+    1. If your database supports FULL OUTER JOIN (PostgreSQL, SQL Server, Oracle, etc.), use a native query.
+
+    e.g:    @Repository
+            public interface MovieRepository
+                    extends JpaRepository<Movie, Long> {
+
+                @Query(value = """
+                    SELECT *
+                    FROM movies m
+                    FULL OUTER JOIN directors d
+                        ON m.director_id = d.director_id
+                    """,
+                    nativeQuery = true)
+                List<Object[]> findMoviesAndDirectors();
+            }
+
+    2. If your database does not support FULL OUTER JOIN (MySQL, MariaDB, etc.), you can use a combination of LEFT JOIN and RIGHT JOIN with UNION ALL to achieve the same result.
+        A FULL JOIN can be expressed as:
+            LEFT JOIN
+            UNION
+            RIGHT JOIN
+
+        Syntax:
+
+        SELECT *
+        FROM left_table
+        LEFT JOIN right_table ON left_table.id = right_table.id
+        UNION
+        SELECT *
+        FROM left_table
+        RIGHT JOIN right_table ON left_table.id = right_table.id;
+
+*/

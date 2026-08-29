@@ -310,3 +310,61 @@ ORDER BY
 -- The word "generally" above is important because in some special cases (for example, a perfect one-to-one match with no unmatched rows), the results may happen to be the same. However, the join semantics do change.
 -- So, a LEFT JOIN can be rewritten as a RIGHT JOIN by swapping the table order.
 -- LEFT JOIN and RIGHT JOIN are not symmetric joins, so swapping table order generally changes the logical result set.
+
+/*
+    How to achieve LEFT JOIN with Hibernate and Spring Data JPA?
+        - In Hibernate and Spring Data JPA, you can achieve a LEFT JOIN using JPQL (Java Persistence Query Language) or the Criteria API.
+        - In Spring Data JPA, you can use the @Query annotation to define a JPQL query with a LEFT JOIN. For example:
+
+      e.g:  @Entity
+            public class Movie {
+                @Id
+                private Long id;
+
+                private String title;
+
+                @ManyToOne
+                @JoinColumn(name = "director_id")
+                private Director director;
+            }
+
+            @Entity
+            public class Director {
+                @Id
+                private Long id;
+
+                private String name;
+            }
+
+            JPQL:
+                @Query("""
+                        SELECT m FROM Movie m LEFT JOIN m.director d
+                """)
+                List<Movie> findAllMovies();
+
+            Equivalent SQL:
+                SELECT
+                    m.*
+                FROM
+                    movies m
+                LEFT JOIN
+                    directors d ON m.director_id = d.director_id;
+
+    LEFT JOIN FETCH:
+        - In Hibernate, you can also use the LEFT JOIN FETCH clause to fetch associated entities in a single query. This is useful for avoiding the N+1 select problem.
+        - For example, if you want to fetch all movies along with their directors, you can use the following JPQL query:
+
+            @Query("""
+                    SELECT m FROM Movie m LEFT JOIN FETCH m.director
+            """)
+            List<Movie> findAllMoviesWithDirectors();
+
+        - This will return a list of Movie entities with their associated Director entities fetched in a single query.
+        - Without FETCH, Hibernate would execute a separate query for each Movie to fetch its Director, leading to the N+1 select problem.
+
+    For Interviews:
+        - LEFT JOIN in Hibernate and Spring Data JPA is implemented using LEFT JOIN in JPQL/HQL.
+        - It returns all records from the left entity and matching records from the joined entity.
+        - When entities are mapped using relationships such as @ManyToOne, the join is typically written as LEFT JOIN entity.relationship.
+        - To eagerly load associated entities and avoid the N+1 problem, LEFT JOIN FETCH is commonly used.
+*/
